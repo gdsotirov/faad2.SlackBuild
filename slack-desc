@@ -1,15 +1,11 @@
-faad: Faad 2.0 (2004-09-15)
-faad:
-faad: Freeware Advanced Audio (AAC) Decoder including SBR decoding
-faad: http://www.audiocoding.com/
-faad:
-faad: FAAD2 is a HE, LC, MAIN and LTP profile, MPEG2 and MPEG-4 AAC decoder.
-faad: FAAD2 includes code for SBR (HE AAC) decoding.
-faad: FAAD2 is licensed under the GPL.
-faad:
-faad:
-faad: ---
-faad: Package build by Georgi D. Sotirov <gdsotirov@dir.bg>
-faad: Configure command: ./configure --prefix=/usr/local
-faad: Build date: 2005-03-15 22:50
-faad:
+faad2: FAAD2 (Freeware Advanced Audio Decoder)
+faad2:
+faad2: FAAD2 is a reference decoder frontend and decoder library for
+faad2: MPEG2 and MPEG4 AAC.  The supported AAC profiles are HE, Main, LC,
+faad2: LTP, and LD.  It also supports all these profiles in their ER
+faad2: (Error Resilient) equivalent.  This decoder can be used for DRM
+faad2: (Digital Radio mondiale) without any major changes.
+faad2: The 2.0 version of FAAD2 adds the ability to decode HE AAC (High
+faad2: Efficiency) and PS AAC (Parametric Stereo) files.
+faad2:
+faad2: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
