@@ -1,14 +1,30 @@
 #!/bin/sh
 #
-# SlackBuild for FAAD2 
-# Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+# Slackware build script for FAAD2
+# Copyright (C) 2007-2010,2012 Georgi D. Sotirov <gdsotirov@dir.bg>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# 
+# $Id: faad2.SlackBuild,v 1.6 2012/09/01 18:20:45 gsotirov Exp $
 #
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=faad2
 VERSION=2.7
-BUILD=2
+BUILD=${BUILD:-1}
 ARCH=${ARCH:-i486}
 
 TMP=${TMP:-/tmp}
@@ -34,7 +50,7 @@ mkdir -p $PKG
 
 # Extract and fix source
 cd $TMP
-tar xvf $CWD/$NAME-$VERSION.tar.bz2
+tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 3
 cd $NAME-$VERSION
 fix_source
 
@@ -44,20 +60,17 @@ CXXFLAGS=$SLKCFLAGS \
 ./configure --build=$ARCH-slackware-linux \
             --host=$ARCH-slackware-linux \
             --prefix=/usr \
+            --libdir=/usr/lib${LIBDIRSUFFIX} \
             --mandir=/usr/man \
             --enable-shared=yes \
             --enable-static=no \
             --with-xmms \
             --with-drm \
-            --with-mpeg4ip || exit 2
+            --with-mpeg4ip || exit 4
 
 # Build & install
-make -j4 || exit 3
-
-PKG="$TMP/package-$NAME"
-mkdir -p $PKG
-
-make DESTDIR=$PKG install || exit 4
+make -j4 || exit 5
+make DESTDIR=$PKG install || exit 6
 
 # Prepare
 bin_perms $PKG
