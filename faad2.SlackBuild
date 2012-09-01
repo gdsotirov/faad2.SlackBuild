@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # 
-# $Id: faad2.SlackBuild,v 1.6 2012/09/01 18:20:45 gsotirov Exp $
+# $Id: faad2.SlackBuild,v 1.7 2012/09/01 18:27:37 gsotirov Exp $
 #
 
 . ../../slack-package.conf
@@ -76,6 +76,7 @@ make DESTDIR=$PKG install || exit 6
 bin_perms $PKG
 ( cd $PKG; strip_bin; strip_lib )
 ( cd $SRC; create_docs $PKG $NAME-$VERSION )
+( cd $PKG/usr/man; mv manm man1; cd man1; mv faad.man faad.1 )
 gzip_man $PKG
 
 mkdir -p $PKG/install
