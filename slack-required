@@ -1,2 +1,2 @@
-glibc-solibs >= 2.9
+glibc-solibs >= 2.13
 id3lib >= 3.8.3
