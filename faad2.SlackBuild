@@ -4,7 +4,7 @@
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=faad2
 VERSION=2.7
@@ -39,11 +39,12 @@ cd $NAME-$VERSION
 fix_source
 
 # Configure
-CFLAGS=$SLKCFLAGS \
-CXXFLAGS=$SLKCFLAGS \
+CFLAGS="$SLKCFLAGS -fPIC " \
+CXXFLAGS="$SLKCFLAGS -fPIC " \
 ./configure --build=$ARCH-slackware-linux \
             --host=$ARCH-slackware-linux \
             --prefix=/usr \
+            --libdir=/usr/lib${LIBDIRSUFFIX} \
             --mandir=/usr/man \
             --enable-shared=yes \
             --enable-static=no \
@@ -63,6 +64,7 @@ make DESTDIR=$PKG install || exit 4
 bin_perms $PKG
 ( cd $PKG; strip_bin; strip_lib )
 ( cd $SRC; create_docs $PKG $NAME-$VERSION )
+( cd $PKG/usr/man; mv manm man1; cd man1; mv faad.man faad.1 )
 gzip_man $PKG
 
 mkdir -p $PKG/install
